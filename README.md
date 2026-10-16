@@ -2,7 +2,9 @@
 
 面向**企业管理制度与业务数据**场景的智能问答系统。提供「经典 RAG 检索问答」与「智能体工具调用问答」两种模式：既能基于上传的制度文档作答，也能自主调用工具查询业务数据库、执行精确计算，并以**流式**方式输出答案。
 
-📦 代码仓库：<https://github.com/Life-Delight/RAG-Studio>
+> 🌐 在线体验：<https://enterprise-rag-qa.app.workbuddy.host/>
+>
+> 📦 代码仓库：<https://github.com/Life-Delight/RAG-Studio>
 
 ---
 
@@ -115,26 +117,28 @@ RAG-Studio/
 
 ### 4.2 启动后端
 
-```bash
-cd backend
-python -m venv ../.venv                 # 首次创建虚拟环境
-../.venv/Scripts/activate               # Windows；Linux/macOS 用 ../.venv/bin/activate
-pip install -r requirements.txt
-```
-
-配置密钥（**必须**，否则启动脚本会提示并退出）：
+**第 1 步：配置密钥（必须）**
 
 ```bash
-cd ..                        # 回到项目根目录
 copy .env.example .env       # Windows；Linux/macOS 用 cp .env.example .env
-# 编辑 .env，把 LLM_API_KEY 换成你自己的 Key
+# 编辑 .env，把 LLM_API_KEY 换成你自己的 DeepSeek Key
 ```
 
-启动：
+**第 2 步：启动（Windows 一键，推荐）**
 
 ```bash
-start_backend.bat            # 或手动执行：
-.venv/Scripts/python -m uvicorn app.main:app --host 127.0.0.1 --port 8000 --app-dir backend
+start_backend.bat
+```
+
+该脚本会自动完成：检测并创建虚拟环境 → 安装 `backend/requirements.txt` 中的依赖（首次运行需几分钟）→ 读取 `.env` → 启动服务。**不需要手动 `pip install`。**
+
+**或者手动执行（任意系统）**
+
+```bash
+python -m venv .venv
+.venv/Scripts/activate                  # Windows；Linux/macOS 用 source .venv/bin/activate
+pip install -r backend/requirements.txt
+python -m uvicorn app.main:app --host 127.0.0.1 --port 8000 --app-dir backend
 ```
 
 ### 4.3 启动前端
@@ -245,6 +249,6 @@ A：它是项目早期基于「本地 Ollama 模型」编写的编排文件，�
 
 ## 9. 说明
 
-- 本项目为个人开发的作品，定位为**私有知识库问答系统**的实现与技术验证
+- 本项目为毕业设计作品，定位为**私有知识库问答系统**的实现与技术验证
 - 检索效果评估方法与数据见 `HYBRID_SEARCH_AND_EVALUATION.md`
 - `示例文档/` 中提供了可直接上传体验的示例制度文档

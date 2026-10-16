@@ -1,0 +1,52 @@
+# ===== 密钥与本地配置（务必不要提交）=====
+.env
+.env.local
+.env.production
+*.local
+
+# ===== Python =====
+__pycache__/
+*.py[cod]
+*.pyo
+.venv/
+venv/
+*.egg-info/
+.pytest_cache/
+
+# ===== Node =====
+node_modules/
+dist/
+.vite/
+auto-imports.d.ts
+components.d.ts
+
+# ===== 大体积模型与缓存（请按 README 说明自行下载）=====
+models/
+hf_cache/
+*.safetensors
+*.onnx
+*.bin
+*.pt
+
+# ===== 运行时数据（含上传的文档与会话，勿提交）=====
+uploaded_files/
+chroma_data/
+database/
+.ollama/
+
+# ===== 调试残留 =====
+*.log
+*_test.txt
+checkpoints/
+
+# ===== 编辑器 / 系统 =====
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
+
+# ===== 备份文件 =====
+*.bak
+*.old
+*.tmp
+vite.config.ts.timestamp-*.mjs

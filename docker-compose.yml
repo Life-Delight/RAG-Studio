@@ -1,0 +1,81 @@
+services:
+
+  ollama:
+    image: ollama/ollama:latest
+    container_name: rag-ollama
+    ports:
+      - "11434:11434"
+    environment:
+      - OLLAMA_KEEP_ALIVE=-1
+    volumes:
+      - ./.ollama:/root/.ollama
+    restart: unless-stopped
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
+    healthcheck:
+      test: ["CMD", "ollama", "list"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 60s
+    networks:
+      - rag-net
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: rag-backend
+    ports:
+      - "8000:8000"
+    environment:
+      - OLLAMA_BASE_URL=http://ollama:11434/v1
+      - OLLAMA_MODEL=deepseek-r1:7b
+      - UPLOAD_DIR=/app/uploaded_files
+      - CHROMA_DIR=/app/chroma_data
+      - DATABASE_DIR=/app/database
+      - CHUNK_SIZE=500
+      - CHUNK_OVERLAP=50
+      - TOP_K=20
+      - MIN_RELEVANCE_SCORE=0.55
+      - HIGH_CONFIDENCE_SCORE=0.72
+      - MIN_SOURCE_HITS=3
+      - MIN_SOURCE_GROUPS=1
+      - HF_ENDPOINT=https://hf-mirror.com
+      - HF_HOME=/app/hf_cache
+    volumes:
+      - ./uploaded_files:/app/uploaded_files
+      - ./chroma_data:/app/chroma_data
+      - ./database:/app/database
+      - ./hf_cache:/app/hf_cache
+    depends_on:
+      ollama:
+        condition: service_healthy
+    restart: unless-stopped
+    networks:
+      - rag-net
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: rag-frontend
+    ports:
+      - "3000:80"
+    depends_on:
+      - backend
+    restart: unless-stopped
+    networks:
+      - rag-net
+
+networks:
+  rag-net:
+    driver: bridge
+
+volumes:
+  ollama_data:

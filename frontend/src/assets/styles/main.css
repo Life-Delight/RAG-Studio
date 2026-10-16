@@ -1,0 +1,189 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700;800&family=JetBrains+Mono:wght@400;500&family=ZCOOL+XiaoWei&display=swap');
+
+:root {
+  --primary: #4f7cff;
+  --primary-light: #7aa2ff;
+  --primary-dark: #305bd4;
+  --accent: #2dd4bf;
+  --accent-soft: #68e4d2;
+
+  --bg: #070b14;
+  --bg-elevated: #0c1222;
+  --bg-card: rgba(15, 23, 42, 0.72);
+  --bg-card-strong: rgba(20, 30, 54, 0.88);
+  --bg-sidebar: rgba(8, 12, 23, 0.85);
+  --bg-hover: rgba(92, 124, 255, 0.14);
+
+  --border: rgba(123, 146, 194, 0.22);
+  --border-strong: rgba(123, 146, 194, 0.4);
+  --text: #e8eeff;
+  --text-muted: #9aabc9;
+
+  --success: #22c55e;
+  --warning: #f59e0b;
+  --danger: #f43f5e;
+
+  --radius: 16px;
+  --radius-sm: 10px;
+  --radius-xs: 8px;
+
+  --shadow-soft: 0 8px 30px rgba(3, 8, 20, 0.3);
+  --shadow-strong: 0 16px 48px rgba(3, 8, 20, 0.5);
+
+  --transition: all 0.24s cubic-bezier(.2,.8,.2,1);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+*::selection {
+  background: rgba(122, 162, 255, 0.34);
+  color: #fff;
+}
+
+html, body, #app {
+  height: 100%;
+  font-family: 'Noto Sans SC', -apple-system, BlinkMacSystemFont, sans-serif;
+  background:
+    radial-gradient(circle at 16% 8%, rgba(79, 124, 255, 0.16), transparent 30%),
+    radial-gradient(circle at 86% 20%, rgba(45, 212, 191, 0.12), transparent 28%),
+    radial-gradient(circle at 58% 82%, rgba(120, 86, 255, 0.12), transparent 34%),
+    var(--bg);
+  color: var(--text);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 8px; height: 8px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, rgba(122,162,255,.7), rgba(45,212,191,.5));
+  border-radius: 99px;
+}
+::-webkit-scrollbar-thumb:hover { filter: brightness(1.1); }
+
+/* Element Plus theme overrides */
+.el-button {
+  border-radius: 11px;
+  transition: var(--transition);
+}
+
+.el-button--primary {
+  --el-button-bg-color: var(--primary);
+  --el-button-border-color: var(--primary);
+  --el-button-hover-bg-color: var(--primary-light);
+  --el-button-hover-border-color: var(--primary-light);
+  --el-button-active-bg-color: var(--primary-dark);
+  box-shadow: 0 10px 24px rgba(79,124,255,0.28);
+}
+
+.el-card {
+  --el-card-bg-color: var(--bg-card);
+  --el-card-border-color: var(--border);
+  border-radius: var(--radius);
+  backdrop-filter: blur(14px);
+}
+
+.el-dialog {
+  --el-dialog-bg-color: var(--bg-card-strong);
+  --el-dialog-border-radius: var(--radius);
+  backdrop-filter: blur(18px);
+  border: 1px solid var(--border-strong);
+  box-shadow: var(--shadow-strong);
+}
+
+.el-table {
+  --el-table-bg-color: transparent;
+  --el-table-tr-bg-color: transparent;
+  --el-table-header-bg-color: rgba(72, 99, 156, 0.12);
+  --el-table-border-color: var(--border);
+  --el-table-text-color: var(--text);
+  --el-table-header-text-color: var(--text-muted);
+  --el-table-row-hover-bg-color: rgba(79,124,255,.12);
+}
+
+.el-table th.el-table__cell,
+.el-table td.el-table__cell {
+  background: transparent;
+  border-bottom-color: var(--border);
+}
+
+.el-input__wrapper,
+.el-textarea__inner,
+.el-select__wrapper {
+  background: rgba(7, 14, 29, 0.75) !important;
+  border: 1px solid var(--border) !important;
+  box-shadow: none !important;
+  border-radius: 11px !important;
+}
+
+.el-input__wrapper.is-focus,
+.el-textarea__inner:focus,
+.el-select__wrapper.is-focused {
+  border-color: var(--primary-light) !important;
+  box-shadow: 0 0 0 3px rgba(79,124,255,.18) !important;
+}
+
+.el-input__inner,
+.el-textarea__inner {
+  color: var(--text) !important;
+}
+
+.el-empty__description p,
+.el-form-item__label,
+.el-dialog__title,
+.el-collapse-item__header,
+.el-collapse-item__wrap {
+  color: var(--text) !important;
+}
+
+/* 折叠面板（参考来源等）在深色界面下需覆盖 Element Plus 浅色白底，否则渲染成白色方块 */
+.el-collapse,
+.el-collapse-item__header,
+.el-collapse-item__wrap,
+.el-collapse-item__content {
+  background-color: transparent !important;
+  border-color: var(--border) !important;
+}
+
+.el-collapse {
+  border-top: none !important;
+  border-bottom: none !important;
+}
+
+.el-collapse-item__header {
+  color: var(--text-muted) !important;
+  font-size: 12px;
+}
+
+.el-collapse-item__arrow {
+  color: var(--text-muted) !important;
+}
+
+.el-tag--info {
+  --el-tag-bg-color: rgba(79,124,255,0.12);
+  --el-tag-border-color: rgba(122,162,255,0.3);
+  --el-tag-text-color: #a8c0ff;
+}
+
+/* Utility animations */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.45; transform: scale(.92); }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-5px); }
+}
+
+.fade-in { animation: fadeIn .35s ease forwards; }
+.float { animation: float 4s ease-in-out infinite; }

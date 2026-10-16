@@ -16,7 +16,10 @@ for /f "usebackq eol=# tokens=1,* delims==" %%a in (".env") do set "%%a=%%b"
 if not defined OLLAMA_BASE_URL set "OLLAMA_BASE_URL=https://api.deepseek.com/v1"
 if not defined OLLAMA_MODEL set "OLLAMA_MODEL=deepseek-chat"
 if not defined HF_ENDPOINT set "HF_ENDPOINT=https://hf-mirror.com"
-if not defined EMBED_MODEL_NAME set "EMBED_MODEL_NAME=%~dp0models\minilm-l12-v2"
+rem 本地已有向量模型则用本地目录，否则留空由代码默认值从 HuggingFace 下载
+if not defined EMBED_MODEL_NAME (
+  if exist "%~dp0models\minilm-l12-v2" set "EMBED_MODEL_NAME=%~dp0models\minilm-l12-v2"
+)
 
 cd /d "%~dp0backend"
 "..\.venv\Scripts\python.exe" -m uvicorn app.main:app --host 127.0.0.1 --port 8000

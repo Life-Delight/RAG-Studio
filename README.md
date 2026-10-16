@@ -2,9 +2,7 @@
 
 面向**企业管理制度与业务数据**场景的智能问答系统。提供「经典 RAG 检索问答」与「智能体工具调用问答」两种模式：既能基于上传的制度文档作答，也能自主调用工具查询业务数据库、执行精确计算，并以**流式**方式输出答案。
 
-> 🌐 在线体验：<https://enterprise-rag-qa.app.workbuddy.host/>
->
-> 📦 代码仓库：<https://github.com/Life-Delight/RAG-Studio>
+📦 代码仓库：<https://github.com/Life-Delight/RAG-Studio>
 
 ---
 
